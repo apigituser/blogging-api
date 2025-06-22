@@ -45,3 +45,14 @@ def createPost(request):
         "createdAt": postDate,
         "updatedAt": postDate
     }, status=201)
+
+@csrf_exempt
+def deletePost(request, id):
+    if request.method == "DELETE":
+        try:
+            post = Post.objects.get(id=id)
+            Post.delete(post)
+            return JsonResponse({"success": "blog deleted successfully"}, status=204)
+        except Exception:
+            return JsonResponse({"not found": f"post with id {id} not found"}, status=404)
+    return JsonResponse({"bad request": "invalid http method"}, status=400)
