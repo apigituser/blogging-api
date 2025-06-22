@@ -7,3 +7,6 @@ class Post(models.Model):
     tags = models.CharField(max_length=30)
     createdAt = models.DateTimeField(auto_now_add=True) ## Set when object is created
     updatedAt = models.DateTimeField(auto_now=True)     ## Set every time object is updated
+
+    def __str__(self):
+        return self.title
