@@ -51,7 +51,19 @@ def updatePost(request, id):
         return JsonResponse({"not found": f"post with id {id} not found"}, status=404)
 
 def getPosts(request):
-    posts = list(Post.objects.values())
+    term = request.GET.get("term")
+    
+    posts = []
+    if term:
+        for post in Post.objects.values():
+            searchData = post["title"] + post["content"]+ post["category"]
+            if term in searchData:
+                posts.append(post)
+    else:
+        posts = list(Post.objects.values())
+    
+    if len(posts) == 0:
+        return JsonResponse({"not found": f"post with search term {term} not found"}, status=404)
     return JsonResponse({"posts": posts})
 
 def createPost(request):
