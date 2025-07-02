@@ -78,7 +78,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         "OPTIONS": {
-            "read_default_file": "/home/eeffoc/Productivity/Backend-Projects/blogging-api/mysql.cnf",
+            "read_default_file": "/path/to/my/mysql.cnf",
         }
     }
 }
